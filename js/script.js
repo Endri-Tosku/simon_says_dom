@@ -11,7 +11,6 @@ const message = document.getElementById("message") // Messaggio all’utente
 
 //// FUNZIONI UTLI ////
 
-
 // Funzione che genera un array di TOT numeri unici compresi tra minNum e maxNum
 function genRandomNumberInRange(minNum, maxNum, tot) {
 
@@ -38,7 +37,6 @@ function genRandomNumInRange(min, max) {
 
 //// MOSTRA I NUMERI NELL'HTML ////
 
-
 // Genera subito i 5 numeri casuali da mostrare all’utente
 const randomNumbers = genRandomNumberInRange(1, 50, 5);
 
@@ -51,3 +49,29 @@ randomNumbers.forEach(num => {
 
 
 
+//// IMPOSTAZIONE DEL COUNTDOWN ////
+
+let seconds = 3; // tempo iniziale del countdown 
+
+countdown.innerText = seconds;// Mostra subito il valore iniziale del countdown nella pagina
+
+// LOGICA DEL TIMER //
+const clock = setInterval(() => { // avvia una funzione ogni 1000ms (1 secondo)
+
+    if (seconds === 0) { // quando il countdown arriva a 0
+        clearInterval(clock); // ferma il timer per evitare loop infinito
+
+        // NASCONDO GLI ELEMENTI CHE NON SERVONO PIÙ //
+        numbersList.classList.add("d-none"); // nasconde la lista dei numeri
+        instructions.classList.add("d-none"); // nasconde le istruzioni iniziali
+        countdown.classList.add("d-none"); // nasconde il countdown
+
+        // MOSTRO GLI ELEMENTI CHE MI SERVONO //
+        answersForm.classList.remove("d-none") // mostra il form dove inserire i numeri
+
+    } else { // Aggiorna il countdown
+        seconds = seconds - 1; // decrementa il tempo di 1 secondo
+        countdown.innerText = seconds; // aggiorna il DOM con il nuovo valore
+    }
+
+}, 1000) // esegue la funzione ogni 1000ms (1 secondo)
